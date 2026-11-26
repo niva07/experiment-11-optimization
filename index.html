@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Performance Optimization – Niva Singh</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Web Performance Optimization</h1>
+  <p>Image Lazy Loading and Client Caching Demo</p>
+</header>
+
+<nav>
+  <a href="#lazy">Lazy Loading</a>
+  <a href="#caching">Local Caching</a>
+  <a href="#student">Student Details</a>
+</nav>
+
+<main>
+
+  <!-- 1. Lazy loading demo -->
+  <section id="lazy">
+    <h2>1. Image Lazy Loading Demo</h2>
+    <p>Using the HTML5 <code>loading="lazy"</code> attribute defers loading off-screen images until scrolled near the viewport, saving network bandwidth on initial load:</p>
+
+    <div class="gallery">
+      <div class="gallery-item">
+        <img src="https://picsum.photos/id/1025/320/200" alt="Pug in blanket" loading="lazy" width="320" height="200">
+        <p class="caption">Image Sample 1 (loading="lazy")</p>
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://picsum.photos/id/1011/320/200" alt="Canoe on lake" loading="lazy" width="320" height="200">
+        <p class="caption">Image Sample 2 (loading="lazy")</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Browser Caching demo -->
+  <section id="caching">
+    <h2>2. Browser Caching Demo</h2>
+    <p>Click the button below to simulate how browser storage avoids redundant network re-fetching:</p>
+    <button onclick="checkCache()">Run Cache Test</button>
+    <div id="cacheStatus" class="output-box">Click "Run Cache Test" to check storage.</div>
+  </section>
+
+  <!-- 3. Student Details -->
+  <section id="student">
+    <h2>Student Details</h2>
+    <p><strong>Name:</strong> Niva Singh</p>
+    <p><strong>Enrollment No.:</strong> J250212105</p>
+    <p><strong>Subject:</strong> Web Design Lab (JCS308)</p>
+    <p><strong>College:</strong> JSS University, Noida</p>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Niva Singh. JSS University Noida.</p>
+</footer>
+
+<script>
+function checkCache() {
+  var box = document.getElementById("cacheStatus");
+  var savedData = localStorage.getItem("niva_cache_demo");
+
+  if (savedData) {
+    box.innerHTML = "<strong>Loaded from Cache:</strong> Saved timestamp " + savedData + " (No network fetch)";
+    box.className = "output-box cached";
+  } else {
+    var currentTime = new Date().toLocaleTimeString();
+    localStorage.setItem("niva_cache_demo", currentTime);
+    box.innerHTML = "<strong>Freshly Cached:</strong> Saved timestamp " + currentTime + ". Click again to verify cached result.";
+    box.className = "output-box fresh";
+  }
+}
+</script>
+</body>
+</html>
